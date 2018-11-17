@@ -28,6 +28,13 @@ function whoIsWinner(piecesPositionList) {
   // Column tp Lign
   const ColumnToLign = arrColumn => {
     let boardLign = [[], [], [], [], [], []];
+    for (let i = 0; i <= 6; i++) {
+      for (let j = 0; j <= 5; j++) {
+        if (arrColumn[i][j] === undefined) {
+          arrColumn[i][j] = 0;
+        }
+      }
+    }
     arrColumn.map((column, i) => {
       column.map((valeur, j) => {
         boardLign[j].push(valeur);
@@ -65,7 +72,6 @@ function whoIsWinner(piecesPositionList) {
     boardLign.map(column => check4(column));
     ColumnToDiagRight(boardColumn).map(column => check4(column));
     ColumnToDiagLeft(boardColumn).map(column => check4(column));
-    console.log(i);
     if (winner !== "Draw") {
       break;
     }
@@ -76,20 +82,30 @@ function whoIsWinner(piecesPositionList) {
 
 console.log(
   whoIsWinner([
-    "A_Yellow",
     "B_Red",
     "B_Yellow",
     "C_Red",
+    "D_Yellow",
+    "B_Red",
+    "D_Yellow",
+    "B_Red",
+    "G_Yellow",
+    "D_Red",
     "G_Yellow",
     "C_Red",
-    "C_Yellow",
-    "D_Red",
+    "D_Yellow",
+    "C_Red",
+    "E_Yellow",
+    "F_Red",
+    "B_Yellow",
+    "F_Red",
     "G_Yellow",
     "D_Red",
-    "G_Yellow",
-    "D_Red",
+    "E_Yellow",
+    "F_Red",
     "F_Yellow",
-    "E_Red",
-    "D_Yellow"
+    "G_Red",
+    "G_Yellow",
+    "B_Red"
   ])
 );
