@@ -1,9 +1,9 @@
 function whoIsWinner(piecesPositionList) {
   // A, B, C...
   let conv = { A: 0, B: 1, C: 2, D: 3, E: 4, F: 5, G: 6 };
-  let winner = "";
-  let testR = Array(4).join("R");
-  let testY = Array(4).join("Y");
+  let winner = "Draw";
+  let testR = Array(5).join("R");
+  let testY = Array(5).join("Y");
 
   // check 4 in a row
   const check4 = row => {
@@ -36,12 +36,21 @@ function whoIsWinner(piecesPositionList) {
   };
 
   // Diag to row
-  const ColumnToDiag = arr => {
+  const ColumnToDiagRight = arr => {
     let diag = [[], [], [], [], [], [], [], [], [], [], []];
     boardColumn.map((column, i) => {
       column.map((valeur, j) => {
-        console.log(i, j, valeur);
         diag[i + j][j] = valeur;
+      });
+    });
+    return diag;
+  };
+
+  const ColumnToDiagLeft = arr => {
+    let diag = [[], [], [], [], [], [], [], [], [], [], []];
+    boardColumn.map((column, i) => {
+      column.map((valeur, j) => {
+        diag[i + 5 - j][j] = valeur;
       });
     });
     return diag;
@@ -56,26 +65,25 @@ function whoIsWinner(piecesPositionList) {
   boardLign.map(column => check4(column));
 
   // DIAG RIGHT
-  ColumnToDiag(boardLign).map(column => check4(column));
+  ColumnToDiagRight(boardLign).map(column => check4(column));
 
   // DIAG LEFT
-  console.log(winner);
+  ColumnToDiagLeft(boardLign).map(column => check4(column));
+
+  return winner;
 }
 
 console.log(
   whoIsWinner([
     "A_Y",
     "B_R",
-    "C_R",
+    "B_Y",
     "C_R",
     "C_R",
     "C_Y",
-    "D_Y",
-    "D_Y",
-    "D_Y",
     "D_R",
-    "E_R",
-    "E_Y",
-    "F_Y"
+    "D_R",
+    "D_R",
+    "D_Y"
   ])
 );
