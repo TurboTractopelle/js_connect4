@@ -38,7 +38,7 @@ function whoIsWinner(piecesPositionList) {
   // Diag to row
   const ColumnToDiagRight = arr => {
     let diag = [[], [], [], [], [], [], [], [], [], [], []];
-    boardColumn.map((column, i) => {
+    arr.map((column, i) => {
       column.map((valeur, j) => {
         diag[i + j][j] = valeur;
       });
@@ -47,10 +47,10 @@ function whoIsWinner(piecesPositionList) {
   };
 
   const ColumnToDiagLeft = arr => {
-    let diag = [[], [], [], [], [], [], [], [], [], [], []];
-    boardColumn.map((column, i) => {
+    let diag = [[], [], [], [], [], [], [], [], [], [], [], []];
+    arr.map((column, i) => {
       column.map((valeur, j) => {
-        diag[i + 5 - j][j] = valeur;
+        diag[i + 6 - j][j] = valeur;
       });
     });
     return diag;
@@ -59,14 +59,11 @@ function whoIsWinner(piecesPositionList) {
   // COLUMN
   let boardColumn = BoardInColumn();
   boardColumn.map(column => check4(column));
-
   // LIGN
   let boardLign = ColumnToLign(boardColumn);
   boardLign.map(column => check4(column));
-
   // DIAG RIGHT
   ColumnToDiagRight(boardLign).map(column => check4(column));
-
   // DIAG LEFT
   ColumnToDiagLeft(boardLign).map(column => check4(column));
 
@@ -75,15 +72,33 @@ function whoIsWinner(piecesPositionList) {
 
 console.log(
   whoIsWinner([
-    "A_Y",
-    "B_R",
-    "B_Y",
-    "C_R",
-    "C_R",
-    "C_Y",
-    "D_R",
-    "D_R",
-    "D_R",
-    "D_Y"
+    "C_Yellow",
+    "E_Red",
+    "G_Yellow",
+    "B_Red",
+    "D_Yellow",
+    "B_Red",
+    "B_Yellow",
+    "G_Red",
+    "C_Yellow",
+    "C_Red",
+    "D_Yellow",
+    "F_Red",
+    "E_Yellow",
+    "A_Red",
+    "A_Yellow",
+    "G_Red",
+    "A_Yellow",
+    "F_Red",
+    "F_Yellow",
+    "D_Red",
+    "B_Yellow",
+    "E_Red",
+    "D_Yellow",
+    "A_Red",
+    "G_Yellow",
+    "D_Red",
+    "D_Yellow",
+    "C_Red"
   ])
 );
