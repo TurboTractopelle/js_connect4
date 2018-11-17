@@ -53,27 +53,29 @@ function whoIsWinner(piecesPositionList) {
         diag[i + 6 - j][j] = valeur;
       });
     });
+    console.log(diag);
     return diag;
   };
 
-  
-  //for (let i = 0; i < piecesPositionList.length; i++){
+  for (let i = 0; i < 1; i++) {
+    let boardColumn = BoardInColumn();
+    boardColumn.map(column => check4(column));
+    let boardLign = ColumnToLign(boardColumn);
+    boardLign.map(column => check4(column));
+    ColumnToDiagRight(boardColumn).map(column => check4(column));
+    ColumnToDiagLeft(boardColumn).map(column => check4(column));
 
-
-  let boardColumn = BoardInColumn();
-  boardColumn.map(column => check4(column));
-  let boardLign = ColumnToLign(boardColumn);
-  boardLign.map(column => check4(column));
-  ColumnToDiagRight(boardColumn).map(column => check4(column));
-  ColumnToDiagLeft(boardColumn).map(column => check4(column));
+    if (winner !== "Draw") {
+      break;
+    }
   }
-
 
   return winner;
 }
 
 console.log(
-  whoIsWinner(["A_Yellow",
+  whoIsWinner([
+    "A_Yellow",
     "B_Red",
     "B_Yellow",
     "C_Red",
@@ -87,5 +89,6 @@ console.log(
     "D_Red",
     "F_Yellow",
     "E_Red",
-    "D_Yellow"])
+    "D_Yellow"
+  ])
 );
