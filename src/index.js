@@ -4,6 +4,7 @@ function whoIsWinner(piecesPositionList) {
   let winner = "Draw";
   let testR = Array(5).join("R");
   let testY = Array(5).join("Y");
+  let arr = [];
 
   // check 4 in a row
   const check4 = row => {
@@ -15,9 +16,9 @@ function whoIsWinner(piecesPositionList) {
   };
 
   // Board in Column
-  const BoardInColumn = () => {
+  const BoardInColumn = arr => {
     let boardColumn = [[], [], [], [], [], [], []];
-    piecesPositionList.map(item => {
+    arr.map(item => {
       let player = item[2] === "R" ? "R" : "Y";
       boardColumn[conv[item[0]]].push(player);
     });
@@ -53,18 +54,18 @@ function whoIsWinner(piecesPositionList) {
         diag[i + 6 - j][j] = valeur;
       });
     });
-    console.log(diag);
     return diag;
   };
 
-  for (let i = 0; i < 1; i++) {
-    let boardColumn = BoardInColumn();
+  for (let i = 0; i < piecesPositionList.length; i++) {
+    arr.push(piecesPositionList[i]);
+    let boardColumn = BoardInColumn(arr);
     boardColumn.map(column => check4(column));
     let boardLign = ColumnToLign(boardColumn);
     boardLign.map(column => check4(column));
     ColumnToDiagRight(boardColumn).map(column => check4(column));
     ColumnToDiagLeft(boardColumn).map(column => check4(column));
-
+    console.log(i);
     if (winner !== "Draw") {
       break;
     }
